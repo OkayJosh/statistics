@@ -29,9 +29,25 @@ class StatisticViewSet(ModelViewSet):
     @action(detail=False, methods=['get'])
     def statistics(self, request):
         filter_params = self.request.query_params.dict()
-        queryset = Statistic.objects.raw(query,
-                     [filter_params['from_date'].split('T', 1)[0],
-                      filter_params['to_date'].split('T', 1)[0], filter_params['type']])
+        args = []
+
+        from_date = filter_params.get('from_date', '0000-00-00').split('T', 1)[0]
+        args.append(from_date)
+
+        to_date = filter_params.get('to_date', '9999-12-31').split('T', 1)[0]
+        args.append(to_date)
+
+        message_type = filter_params.get('type', None)
+
+        type_filter = ""
+
+        if message_type is not None:
+            type_filter = "AND type = %s"
+            args.append(message_type)
+
+        final_query = query.format(type_filter=type_filter)
+
+        queryset = Statistic.objects.raw(final_query, args)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.info_serializer_class(page, many=True)
