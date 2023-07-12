@@ -5,7 +5,8 @@ from django.utils.functional import cached_property
 query = """
     SELECT id, customerId, type, COUNT(id) AS num_messages, ROUND(SUM(amount), 3) AS total_amount
     FROM statistics
-    WHERE created BETWEEN %s AND %s AND type = %s
+    WHERE created BETWEEN %s AND %s
+    {type_filter}
     GROUP BY customerId, type
 """
 
