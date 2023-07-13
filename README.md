@@ -6,7 +6,7 @@
 [Find documentation here](https://documenter.getpostman.com/view/22833562/2s946e9DK3)
 
 
-### Set up
+### Set up Locally
 
 * Clone Repository
 `git clone https://github.com/OkayJosh/statistics.git`
@@ -15,3 +15,10 @@
 `pip install -r requirements.txt`
 * Run the App
 `python manage.py runserver`
+
+### Set up with Docker
+* Make sure you are in the project root directory
+* [Make sure you have docker and docker compose set up](https://docs.docker.com/engine/install/ubuntu/#set-up-the-repository)
+* Run the app 
+`sudo docker compose up
+`
