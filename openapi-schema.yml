@@ -1,0 +1,204 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /message/:
+    get:
+      operationId: listStatisticSerializers
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Statistics'
+          description: ''
+      tags:
+      - message
+    post:
+      operationId: createStatisticSerializers
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+          description: ''
+      tags:
+      - message
+  /message/statistics/:
+    get:
+      operationId: statisticsStatisticSerializers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+          description: ''
+      tags:
+      - message
+  /message/{id}/:
+    get:
+      operationId: retrieveStatisticSerializers
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+          description: ''
+      tags:
+      - message
+    put:
+      operationId: updateStatisticSerializers
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+          description: ''
+      tags:
+      - message
+    patch:
+      operationId: partialUpdateStatisticSerializers
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Statistics'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+          description: ''
+      tags:
+      - message
+    delete:
+      operationId: destroyStatisticSerializers
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - message
+components:
+  schemas:
+    Statistics:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          description: The customerId is the customer unique identifier
+        type:
+          type: string
+          description: The type of message received
+          maxLength: 255
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.001
+          maximum: 10000000
+          minimum: -10000000
+          description: Amount billed to the customer, as a string with 3 decimals
+            precision
+        uuid:
+          type: string
+          format: uuid
+          description: The message unique identifier
+        created:
+          type: string
+          format: date-time
+          readOnly: true
