@@ -8,9 +8,10 @@
 
 ### Set up
 
-Clone Repository
+* Clone Repository
 `git clone https://github.com/OkayJosh/statistics.git`
-Install Requirements
+
+* Install Requirements
 `pip install -r requirements.txt`
 * Run the App
 `python manage.py runserver`
