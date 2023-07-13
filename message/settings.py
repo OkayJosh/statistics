@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+from dotenv import dotenv_values
+
+# Load the environment variables from .env
+env_vars = dotenv_values('.env')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+%le0^gzpjn19dc8gyh8+r1xs5)n!kw1re9m6#)0j0($n(nih0'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env_vars['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(env_vars['DEBUG'])
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env_vars['ALLOWED_HOSTS'].split(',')
 
 
 # Application definition
