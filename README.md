@@ -17,6 +17,8 @@
 `python manage.py runserver`
 
 ### Set up with Docker
+* Clone Repository
+`git clone https://github.com/OkayJosh/statistics.git`
 * Make sure you are in the project root directory
 * [Make sure you have docker and docker compose set up](https://docs.docker.com/engine/install/ubuntu/#set-up-the-repository)
 * Run the app 
